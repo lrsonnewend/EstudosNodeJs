@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: skyblue;
+            font-family: Verdana;
+            color: #fff;
+            padding: 30px;
+        }
+
+        h4 {
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        h6 {
+            font-size: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        p, li{
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <%- include ('partials/nav'); %>
+
+    <h4>Bem vindos ao perfil do <%= person %></h4>
+    
+    <p><strong>Age: </strong><%= data.age %></p>
+    <p><strong>Job: </strong><%= data.job %></p>
+    <h6>Hobbies</h6>
+    <ul>
+        <% data.hobbies.forEach(function(i){ %>
+            <li><%= i %></li>
+        <% }); %>
+    </ul>
+</body>
+
+</html>
