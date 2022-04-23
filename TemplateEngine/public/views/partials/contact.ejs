@@ -4,8 +4,8 @@
 <head>
 
     <meta charset="UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <style>
@@ -23,7 +23,7 @@
             text-align: center;
         }
 
-        p{
+        p {
             font-size: 16px;
             text-align: center;
         }
@@ -33,9 +33,23 @@
 
 <body>
     <%- include ('nav'); %>
-    <h4>Contact Us!</h4>
-    
-    <p>Contact the collest cats on the web right here...</p>
+    <h4>Entre em contato!</h4>
+
+    <p>Deixe aqui uma mensagem para nós!...</p>
+    <form action="/contact-success" method="POST" id="contact-form">
+        <label for="who">Quem deseja contatar?</label>
+        <input type="text" name="who" value="<%= qs.person %>">
+        <br><br>
+        <label for="department">Qual departamento?</label>
+        <input type="text" name="department" value="<%= qs.dept %>">
+        <br><br>
+        <label for="email">Deixe aqui seu email de contato</label>
+        <input type="text" name="email">
+        <br><br>
+        <input type="submit" value="Enviar">
+    </form>
+    </div>
+
 </body>
 
 </html>
