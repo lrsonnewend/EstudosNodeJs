@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado!</title>
+
+    <style>
+        body {
+            background-color: skyblue;
+            font-family: Verdana;
+            color: #fff;
+            padding: 30px;
+        }
+
+        h4 {
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <%- include ('nav'); %>
+    <h4>Contato</h4>
+
+    <p>Obrigado! Agora é só esperar nossa resposta.</p>    
+    <br>
+    <p><%= data.who %> entrará em contato :)</p>
+
+</body>
+
+</html>
