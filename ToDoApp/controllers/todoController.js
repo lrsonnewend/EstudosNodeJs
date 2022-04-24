@@ -1,5 +1,24 @@
 var bodyParser = require('body-parser');
 
+var mongoose = require('mongoose');
+
+//conexao com database
+mongoose.connect('mongodb+srv://blogdb:sonnewend2006@clusterblog.xqpbz.mongodb.net/clusterblog?retryWrites=true&w=majority');
+
+//criando schema
+var todoSchema = new mongoose.Schema({
+    item: String
+});
+
+var Todo = mongoose.model('Todo', todoSchema);
+
+var itemOne = Todo({item: 'Trocar cordas do violao'}).save(function(err){
+    if(err) throw err;
+
+    console.log('item salvo!');
+});
+
+
 var data = [{item: 'Estudar Node'}, {item: 'Andar de bike'}, {item: 'Lavar a moto'}];
 
 var urlEncodedParser = bodyParser.urlencoded({extended: false});
