@@ -12,32 +12,33 @@ var todoSchema = new mongoose.Schema({
 
 var Todo = mongoose.model('Todo', todoSchema);
 
-var itemOne = Todo({item: 'Trocar cordas do violao'}).save(function(err){
-    if(err) throw err;
-
-    console.log('item salvo!');
-});
-
-
-var data = [{item: 'Estudar Node'}, {item: 'Andar de bike'}, {item: 'Lavar a moto'}];
+//var data = [{item: 'Estudar Node'}, {item: 'Andar de bike'}, {item: 'Lavar a moto'}];
 
 var urlEncodedParser = bodyParser.urlencoded({extended: false});
 
 module.exports = function (app){ 
 
     app.get('/todo', function (req, res){
-        res.render('todo', {todos: data});
+        // pegar dados do MongoDB e renderizar na view
+        Todo.find({}, function (err, data){
+            if(err) throw err;
+            res.render('todo', {todos: data});
+        });
     });
 
     app.post('/todo', urlEncodedParser, function(req, res){
-        data.push(req.body);
-        res.json({todo: data});
+        //pegar os dados da view e adicinar à tabela no mongodb
+        var newTodo = Todo(req.body).save(function(err, data){
+            if(err) throw err;
+            res.json({todo: data});
+        });                
     });
 
     app.delete('/todo/:item', function (req, res){
-        data = data.filter(function (todo){
-            return todo.item.replace(/ /g, '-') !== req.params.item;
+        //deletar o item selecionado do mongodb
+        Todo.find({item: req.params.item.replace(/\-/g, " ")}).remove(function (err, data){
+            if(err) throw err;
+            res.json({todo: data});
         });
-        res.json({todo: data});
     });
 };
