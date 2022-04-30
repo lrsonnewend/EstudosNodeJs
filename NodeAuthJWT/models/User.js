@@ -19,14 +19,34 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-//funcao disparada antes de salvar dados no bd
+//funcao disparada antes de salvar dados no bd (criptografando senha)
 userSchema.pre('save', async function(next){
+    //gera salt
     const salt = await bcrypt.genSalt();
+
+    //encriptando senha recebida
     this.pass = await bcrypt.hash(this.pass, salt);
     next();
 });
 
-//build model
+//método estático para fazer login
+userSchema.statics.login = async function(email, pass){
+    //verifica se existe um usuário com o email recebido
+    const user = await this.findOne({ email });
+
+    if(user){
+        //compara senhas
+        const auth = await bcrypt.compare(pass, user.pass);
+        if(auth){
+            return user;
+        }
+        throw Error('senha incorreta.');
+   }
+   throw Error('email incorreto.');
+}
+
+//construindo model com User
 const User = mongoose.model('user', userSchema);
 
+//exportando objeto
 module.exports = User;

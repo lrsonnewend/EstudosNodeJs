@@ -2,7 +2,7 @@ const { Router } = require('express');
 const authController = require('../controllers/authController');
 const router = Router();
 
-
+//ROTAS DO APP
 router.get('/signup', authController.signup_get);
 
 router.post('/signup', authController.signup_post);

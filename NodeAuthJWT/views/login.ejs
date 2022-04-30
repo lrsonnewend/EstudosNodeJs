@@ -1,5 +1,62 @@
 <%- include('partials/header'); -%>
 
-<h2>login page</h2>
+<form>
+    <h3>Login</h3>
+    <label for="email">Email</label>
+    <input type="text" name="email" required>
+    <div class="email-error"></div>
+    <label for="pass">Senha</label>
+    <input type="password" name="pass" required>
+    <div class="pass-error"></div>
+    <button>Entrar</button>
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.email-error');
+    const passError = document.querySelector('.pass-error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        //reset erros
+        emailError.textContent = '';
+        passError.textContent = '';
+
+        //get valores do formulário
+        const email = form.email.value;
+        const pass = form.pass.value;
+        
+        try {
+            //resposta enviada para a rota específica
+            const res = await fetch('/login',
+                {
+                    method: 'POST',
+                    //formata em JSON a resposta da requisição
+                    body: JSON.stringify({ email, pass }),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            
+            //data recebendo a resposta da requisição
+            const data = await res.json();
+
+            console.log(data);
+            
+            //caso erro, variáveis da condicional recebem as propriedades da var data
+            if (data.erros) {
+                emailError.textContent = data.erros.email;
+                passError.textContent = data.erros.pass;
+            }
+
+            //caso true, requisição é enviada para home
+            if (data.user) {
+                location.assign('/');
+            }
+
+        } catch (err) {
+            console.log(err)
+        }
+    });
+</script>
 
 <%- include('partials/footer'); -%>
