@@ -1,11 +1,23 @@
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>sorvete</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <nav>
-    <h1><a href="/">Ninja Smoothies</a></h1>
+    <h1><a href="/">Sonne Smoothies</a></h1>
+    <ul>
+      <% if(user){ %>
+        <li>Bem vindo, <b><%= user.email %></b></li>
+        <li><a href="/logout">Logout</a></li>
+      <% }
+      else{ %>
+        <li><a href="/login">Entrar</a></li>
+        <li><a href="/signup" class="btn">Cadastre-se!</a></li>
+        <% } %>
+    </ul>
   </nav>

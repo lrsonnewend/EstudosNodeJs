@@ -79,7 +79,7 @@ module.exports.login_get = (req, res) => {
 
 //função para realizar login no sistema
 module.exports.login_post = async (req, res) => {
-    
+
     //variaveis recebendo o que vem no corpo da resposta da api
     const { email, pass } = (req.body);
 
@@ -105,4 +105,12 @@ module.exports.login_post = async (req, res) => {
         res.status(400).json({ erros });
     }
 
+}
+
+//função para fazer logout
+module.exports.logout_get = (req, res) => {
+    //limpa o cookie jwt
+    res.cookie('jwt', '', { maxAge: 1 });
+
+    res.redirect('/');
 }
