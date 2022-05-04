@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
         },
         {
             "id": "2",
-            "title": "Paraíso Perdido - John Milton"
+            "title": "A arte da guerra - Sun Tzu"
         },
         {
             "id": "3",

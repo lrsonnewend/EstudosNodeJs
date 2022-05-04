@@ -1,0 +1,10 @@
+version: "3.8"
+services: 
+    nodedocker:
+        build: ./NodeDocker
+        container_name: node_c
+        ports: 
+            - '5000:3000'
+        volumes: 
+            - ./NodeDocker:/app
+            - /app/node_modules
